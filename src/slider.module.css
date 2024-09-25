@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+.splidebox {
+  display: flex;
+  height: 60vh;
+  width: 89%;
+}
+.slides {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 100%;
+  width: auto;
+}
+img {
+  position: relative;
+  object-fit: cover;
+}
+ul {
+  align-items: flex-end;
+}

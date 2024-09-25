@@ -1,0 +1,17 @@
+.navlink {
+  color: burlywood;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 2px burlywood;
+  position: relative;
+  bottom: 0px;
+}
+.heading {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

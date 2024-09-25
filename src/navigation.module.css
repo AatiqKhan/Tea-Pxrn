@@ -1,0 +1,21 @@
+.navs {
+  padding: 80px 0;
+  border-bottom: solid 2px black;
+}
+ul {
+  margin: 90px 0;
+}
+li {
+  list-style: none;
+  margin: 30px;
+}
+li a {
+  text-decoration: none;
+  font-family: cursive;
+  font-size: 27px;
+  color: black;
+}
+
+span {
+  font-size: 15px;
+}

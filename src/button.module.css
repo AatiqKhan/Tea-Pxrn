@@ -1,0 +1,13 @@
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  height: 100%;
+  width: auto;
+  border-radius: 5px;
+  margin: 20px 0;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: black;
+}

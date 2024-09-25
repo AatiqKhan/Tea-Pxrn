@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.head {
+  display: inline-block;
+  border-bottom: 2px solid burlywood;
+  padding-bottom: 0.5rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  width: 100%; /* Adjust the width as needed */
+  /* Ensures that all children are stretched to the same height */
+}
+
+.left,
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.left {
+  align-items: flex-end;
+}
+.box {
+  padding: 20px;
+  text-align: center;
+  width: 70%;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* Takes up remaining space */
+  padding: 10px;
+}
+
+.middle img {
+  /* Ensure the image fits within the viewport height */
+  height: auto;
+}
+.left .box {
+  text-align: end;
+}
+.right .box {
+  text-align: start;
+}

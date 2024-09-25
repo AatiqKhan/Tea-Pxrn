@@ -1,0 +1,28 @@
+.container {
+  height: 250px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  height: 100%;
+  padding-top: 40px;
+}
+.imagewrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ensure images don’t overflow the container */
+  position: relative;
+  width: 100%; /* Make wrapper fill the column width */
+  height: 100%; /* Set a fixed height for the image container */
+}
+
+.imagewrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Scales the image to fit within the container while maintaining aspect ratio */
+  /* Remove any bottom space/gap */
+}

@@ -1,0 +1,10 @@
+.text {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0 100px;
+  height: 100%;
+  line-height: 27px;
+  margin-bottom: 30px;
+}

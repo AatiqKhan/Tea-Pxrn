@@ -1,0 +1,13 @@
+.body {
+  padding: 40px;
+}
+.container {
+  width: 100%;
+  height: auto;
+}
+
+.item img {
+  border-radius: 20px;
+  display: block;
+  width: 100%;
+}
