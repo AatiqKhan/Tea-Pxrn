@@ -20,9 +20,20 @@ export async function deleteMenuItem(id) {
   }
   return data;
 }
+// Create a new menu item
+export async function addMenuItem(newItem) {
+  const { data, error } = await supabase
+    .from("menu")
+    .insert([newItem])
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error("menu item could not be deleted");
+  }
+  return data;
+}
 
 // Update an existing menu item
 
 // Function to delete a document by title
-
-// Create a new menu item

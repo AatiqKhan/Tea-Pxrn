@@ -1,13 +1,18 @@
 // import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { useState } from "react";
 import { fetchMenuItems } from "../../services/fetchMenu";
+import { Button } from "@mui/material";
+import AddSharpIcon from "@mui/icons-material/AddSharp";
 // import { addItem, fetchMenuItems } from "../../services/fetchMenu";
 // import AddItemForm from "../../ui/AddItemForm";
 import LoadingScreen from "../../ui/LoadingScreen";
+import MenuForm from "./menuForm";
 import MenuRow from "./MenuRow";
 
 export default function AdminMenu() {
+  const [showForm, setShowForm] = useState(false);
   // const queryClient = useQueryClient();
 
   //adding to sanity
@@ -36,9 +41,6 @@ export default function AdminMenu() {
   });
   console.log("xxxxx", menu);
 
-  // const dataG = fetchGalleryItems();
-  // console.log("hhhhh", data);
-  // console.log("ggggg", dataG);
   // if (isPending) return <LoadingScreen />;
   if (isLoading) return <LoadingScreen />;
   if (error) return <p className="text-red-600">Error: {error.message}</p>;
@@ -65,6 +67,15 @@ export default function AdminMenu() {
           {mutation.isSuccess && <p>Item added successfully!</p>} */}
         </div>
       </div>
+      <Button
+        onClick={() => setShowForm((show) => !show)}
+        size="small"
+        variant="outlined"
+        startIcon={<AddSharpIcon />}
+      >
+        Add Menu Item
+      </Button>
+      {showForm && <MenuForm />}
     </div>
   );
 }
