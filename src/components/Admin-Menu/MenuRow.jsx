@@ -5,15 +5,7 @@ import { deleteMenuItem } from "../../services/fetchMenu";
 
 export default function MenuRow({ menuItem }) {
   const { id, item, price, description } = menuItem;
-  console.log("hello world", item);
   const queryClient = useQueryClient();
-
-  //adding to sanity
-  // const mutation = useMutation(addItem, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries("menuItems"); // Refetch updated data
-  //   },
-  // });
 
   // deleting from supaBase
   const { isLoading, mutate } = useMutation({
@@ -44,4 +36,3 @@ export default function MenuRow({ menuItem }) {
     </div>
   );
 }
-//onClick={() => mutate(title)} disabled={isLoading}>

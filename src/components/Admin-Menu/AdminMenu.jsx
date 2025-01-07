@@ -1,33 +1,16 @@
-// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useState } from "react";
 import { fetchMenuItems } from "../../services/fetchMenu";
 import { Button } from "@mui/material";
 import AddSharpIcon from "@mui/icons-material/AddSharp";
-// import { addItem, fetchMenuItems } from "../../services/fetchMenu";
-// import AddItemForm from "../../ui/AddItemForm";
 import LoadingScreen from "../../ui/LoadingScreen";
 import MenuForm from "./menuForm";
 import MenuRow from "./MenuRow";
 
 export default function AdminMenu() {
   const [showForm, setShowForm] = useState(false);
-  // const queryClient = useQueryClient();
 
-  //adding to sanity
-  // const mutation = useMutation(addItem, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(["menu"]); // Refetch updated data
-  //   },
-  // });
-  // const handleAddItem = (itemData) => {
-  //   console.log("handle add items");
-  //   mutation.mutate(itemData);
-  // };
-
-  //fetchMenuItems().then((data) => console.log("Test data:", data));
-  //const data = fetchMenuItems();
   const {
     //isPending,
     isLoading,
@@ -59,23 +42,19 @@ export default function AdminMenu() {
             <MenuRow menuItem={menuItem} key={menuItem.id} />
           ))}
         </div>
-
-        <div>
-          {/* <AddItemForm onAddItem={handleAddItem} />  */}
-          {/* {mutation.isLoading && <p>Adding...</p>} 
-          {mutation.isError && <p>Error adding item.</p>}
-          {mutation.isSuccess && <p>Item added successfully!</p>} */}
-        </div>
       </div>
-      <Button
-        onClick={() => setShowForm((show) => !show)}
-        size="small"
-        variant="outlined"
-        startIcon={<AddSharpIcon />}
-      >
-        Add Menu Item
-      </Button>
-      {showForm && <MenuForm />}
+
+      <div>
+        <Button
+          onClick={() => setShowForm((show) => !show)}
+          size="small"
+          variant="outlined"
+          startIcon={<AddSharpIcon />}
+        >
+          Add Menu Item
+        </Button>
+        {showForm && <MenuForm />}
+      </div>
     </div>
   );
 }
