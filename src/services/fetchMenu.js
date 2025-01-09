@@ -35,5 +35,3 @@ export async function addMenuItem(newItem) {
 }
 
 // Update an existing menu item
-
-// Function to delete a document by title
