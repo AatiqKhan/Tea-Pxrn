@@ -6,7 +6,16 @@ export const fetchGalleryItems = async () => {
 
   if (error) {
     console.error(error);
-    throw new Error("menu could not be loaded");
+    throw new Error("Image could not be loaded");
   }
   return data;
 };
+// Delete a Gallery item
+export async function deleteGalleryItem(id) {
+  const { data, error } = await supabase.from("gallery").delete().eq("id", id);
+  if (error) {
+    console.error(error);
+    throw new Error("Image could not be deleted");
+  }
+  return data;
+}

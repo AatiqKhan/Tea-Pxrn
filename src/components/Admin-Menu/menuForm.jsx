@@ -24,7 +24,6 @@ export default function MenuForm() {
   });
 
   function onSubmit(data) {
-    console.log(data);
     mutate(data);
   }
   function onError(errors) {
