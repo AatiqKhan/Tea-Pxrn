@@ -3,6 +3,10 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
+import { addGalleryItem } from "../../services/fetchGallery";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -17,23 +21,61 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 export default function GalleryForm() {
+  const { register, handleSubmit, reset, formState } = useForm();
+  const { errors } = formState;
+
+  const queryClient = useQueryClient();
+  const { isLoading: isAdding, mutate } = useMutation({
+    mutationFn: addGalleryItem,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["gallery"] }); // Refresh 'menu' query after deletion
+      toast.success("added an item from gallery");
+      reset();
+    },
+    onError: (error) => toast.error(error.message), // Handle errors
+  });
+
+  function onSubmit(data) {
+    mutate({ ...data, image: data.image[0] });
+    //console.log(data);
+  }
+  function onError(errors) {
+    console.log(errors);
+  }
   return (
     <>
-      <Button
-        component="label"
-        role={undefined}
-        variant="contained"
-        tabIndex={-1}
-        startIcon={<CloudUploadIcon />}
-      >
-        Upload files
-        <VisuallyHiddenInput
-          type="file"
-          onChange={(event) => console.log(event.target.files)}
-          multiple
+      <div>Gallery Form</div>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
+        <Button
+          component="label"
+          role={undefined}
+          variant="contained"
+          tabIndex={-1}
+          startIcon={<CloudUploadIcon />}
+        >
+          Upload files
+          <VisuallyHiddenInput
+            type="file"
+            {...register("image", { required: "This Field is Required" })}
+          />
+        </Button>
+        {errors?.image?.message && (
+          <p className="text-red-700">{errors.image.message}</p>
+        )}
+        <TextField
+          id="outlined-basic"
+          label="alt_text"
+          variant="outlined"
+          {...register("alt_text", { required: "This Field is Required" })}
         />
-      </Button>
-      <TextField id="outlined-basic" label="Alt Text" variant="outlined" />
+        {errors?.alt_text?.message && (
+          <p className="text-red-700">{errors.alt_text.message}</p>
+        )}
+        <div>
+          <button type="reset">cancel</button>
+          <button disabled={isAdding}>add</button>
+        </div>
+      </form>
     </>
   );
 }

@@ -32,7 +32,7 @@ export default function AdminGallery() {
           variant="outlined"
           startIcon={<AddSharpIcon />}
         >
-          Add Menu Item
+          Add Image
         </Button>
         {showForm && <GalleryForm />}
       </div>
