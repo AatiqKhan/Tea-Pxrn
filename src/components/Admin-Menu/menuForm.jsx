@@ -1,34 +1,62 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-//import { filledInputClasses } from "@mui/material/FilledInput";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { useForm } from "react-hook-form";
-import { addMenuItem } from "../../services/fetchMenu";
+import { addEditMenuItem } from "../../services/fetchMenu";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
-export default function MenuForm() {
-  const { register, handleSubmit, reset, formState } = useForm();
+export default function MenuForm({ menuEdit = {} }) {
+  const { id: editId, ...editValues } = menuEdit;
+  const isEdit = Boolean(editId);
+  const { register, handleSubmit, reset, formState } = useForm({
+    defaultValues: isEdit ? editValues : {},
+  });
   const { errors } = formState;
 
   const queryClient = useQueryClient();
-  const { isLoading: isAdding, mutate } = useMutation({
-    mutationFn: addMenuItem,
+
+  // creating
+  const { isLoading: isAdding, mutate: createMenu } = useMutation({
+    mutationFn: addEditMenuItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["menu"] }); // Refresh 'menu' query after deletion
       toast.success("added an item from menu");
       reset();
     },
-    onError: (error) => toast.error(error.message), // Handle errors
+    onError: (error) => {
+      toast.error(error.message);
+    }, // Handle errors
+  });
+
+  //editing
+  const { isLoading: isEditing, mutate: editMenu } = useMutation({
+    mutationFn: ({ newMenuData, id }) => addEditMenuItem(newMenuData, id),
+    //mutationFn: addEditMenuItem,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["menu"] }); // Refresh 'menu' query after deletion
+      toast.success("added an item from menu");
+      reset();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.log(error);
+    }, // Handle errors
   });
 
   function onSubmit(data) {
-    mutate(data);
+    if (isEdit) {
+      editMenu({ newMenuData: data, id: editId });
+      console.log("xxx", data);
+    } else createMenu(data);
+    //mutate(data);
   }
   function onError(errors) {
     console.log(errors);
   }
+
+  const isWorking = isAdding || isEditing;
 
   return (
     <>
@@ -87,7 +115,9 @@ export default function MenuForm() {
         )}
         <button type="reset">cancel</button>
 
-        <button disabled={isAdding}>add</button>
+        <button disabled={isWorking}>
+          {isEdit ? "Edit Menu" : "Add Menu"}
+        </button>
       </form>
     </>
   );

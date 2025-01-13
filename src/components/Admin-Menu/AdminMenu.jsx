@@ -22,7 +22,7 @@ export default function AdminMenu() {
     queryKey: ["menu"],
     queryFn: fetchMenuItems,
   });
-  console.log("xxxxx", menu);
+  //console.log("xxxxx", menu);
 
   // if (isPending) return <LoadingScreen />;
   if (isLoading) return <LoadingScreen />;
