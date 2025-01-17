@@ -3,9 +3,8 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { useForm } from "react-hook-form";
-import { addEditMenuItem } from "../../services/fetchMenu";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
+import { useCreateMenu } from "./useCreateMenu";
+import { useEditMenu } from "./useEditMenu";
 
 export default function MenuForm({ menuEdit = {} }) {
   const { id: editId, ...editValues } = menuEdit;
@@ -14,42 +13,22 @@ export default function MenuForm({ menuEdit = {} }) {
     defaultValues: isEdit ? editValues : {},
   });
   const { errors } = formState;
-
-  const queryClient = useQueryClient();
-
-  // creating
-  const { isLoading: isAdding, mutate: createMenu } = useMutation({
-    mutationFn: addEditMenuItem,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["menu"] }); // Refresh 'menu' query after deletion
-      toast.success("added an item from menu");
-      reset();
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    }, // Handle errors
-  });
-
-  //editing
-  const { isLoading: isEditing, mutate: editMenu } = useMutation({
-    mutationFn: ({ newMenuData, id }) => addEditMenuItem(newMenuData, id),
-    //mutationFn: addEditMenuItem,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["menu"] }); // Refresh 'menu' query after deletion
-      toast.success("added an item from menu");
-      reset();
-    },
-    onError: (error) => {
-      toast.error(error.message);
-      console.log(error);
-    }, // Handle errors
-  });
+  const { isAdding, createMenu } = useCreateMenu();
+  const { isEditing, editMenu } = useEditMenu();
 
   function onSubmit(data) {
     if (isEdit) {
-      editMenu({ newMenuData: data, id: editId });
-      console.log("xxx", data);
-    } else createMenu(data);
+      editMenu(
+        { newMenuData: data, id: editId },
+        {
+          onSuccess: () => reset(),
+        },
+      );
+      //console.log("xxx", data);
+    } else
+      createMenu(data, {
+        onSuccess: () => reset(),
+      });
     //mutate(data);
   }
   function onError(errors) {

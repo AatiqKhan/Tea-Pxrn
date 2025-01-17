@@ -1,22 +1,16 @@
 import { Button } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+
 import React, { useState } from "react";
-import { fetchGalleryItems } from "../../services/fetchGallery";
+
 import AddSharpIcon from "@mui/icons-material/AddSharp";
 import LoadingScreen from "../../ui/LoadingScreen";
 import GalleryForm from "./GalleryForm";
 import GalleryItemRow from "./GalleryItemRow";
+import { useFetchGallery } from "./useFetchGallery";
 
 export default function AdminGallery() {
   const [showForm, setShowForm] = useState(false);
-  const {
-    isLoading,
-    data: item,
-    error,
-  } = useQuery({
-    queryKey: ["gallery"],
-    queryFn: fetchGalleryItems,
-  });
+  const { isLoading, item, error } = useFetchGallery();
   console.log("gggggg", item);
 
   if (isLoading) return <LoadingScreen />;

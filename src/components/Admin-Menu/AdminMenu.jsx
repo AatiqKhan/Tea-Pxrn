@@ -1,27 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useState } from "react";
-import { fetchMenuItems } from "../../services/fetchMenu";
+import { fetchMenuItems } from "../../services/apiMenu";
 import { Button } from "@mui/material";
 import AddSharpIcon from "@mui/icons-material/AddSharp";
 import LoadingScreen from "../../ui/LoadingScreen";
 import MenuForm from "./menuForm";
 import MenuRow from "./MenuRow";
+import { useFetchMenu } from "./useFetchMenu";
 
 export default function AdminMenu() {
   const [showForm, setShowForm] = useState(false);
 
-  const {
-    //isPending,
-    isLoading,
-    data: menu,
-    error,
-  } = useQuery({
-    staleTime: 0,
-
-    queryKey: ["menu"],
-    queryFn: fetchMenuItems,
-  });
+  const { isLoading, menu, error } = useFetchMenu();
   //console.log("xxxxx", menu);
 
   // if (isPending) return <LoadingScreen />;

@@ -4,9 +4,8 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import { addGalleryItem } from "../../services/fetchGallery";
+
+import { useCreateGallery } from "./useCreateGallery";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -24,19 +23,15 @@ export default function GalleryForm() {
   const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
-  const { isLoading: isAdding, mutate } = useMutation({
-    mutationFn: addGalleryItem,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["gallery"] }); // Refresh 'menu' query after deletion
-      toast.success("added an item from gallery");
-      reset();
-    },
-    onError: (error) => toast.error(error.message), // Handle errors
-  });
+  const { isAdding, addImage } = useCreateGallery();
 
   function onSubmit(data) {
-    mutate({ ...data, image: data.image[0] });
+    addImage(
+      { ...data, image: data.image[0] },
+      {
+        onSuccess: () => reset(),
+      },
+    );
     //console.log(data);
   }
   function onError(errors) {

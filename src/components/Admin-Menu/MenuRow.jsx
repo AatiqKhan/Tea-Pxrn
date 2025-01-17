@@ -1,24 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { toast } from "react-hot-toast";
-import { deleteMenuItem } from "../../services/fetchMenu";
+
 import MenuForm from "./menuForm";
+import { useDeleteMenu } from "./useDeleteMenu";
 
 export default function MenuRow({ menuItem }) {
   const [showForm, setShowForm] = useState(false);
 
   const { id, item, price, description } = menuItem;
-  const queryClient = useQueryClient();
-
-  // deleting from supaBase
-  const { isLoading, mutate } = useMutation({
-    mutationFn: deleteMenuItem,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["menu"] }); // Refresh 'menu' query after deletion
-      toast.success("deleted an item from menu");
-    },
-    onError: (error) => toast.error(error.message), // Handle errors
-  });
+  const { isLoading, deleteMenu } = useDeleteMenu();
 
   ///////////////////////////////////////////////////////////////////////////
 
@@ -32,7 +21,7 @@ export default function MenuRow({ menuItem }) {
           <button onClick={() => setShowForm((show) => !show)}>Edit</button>
           <button
             onClick={() => {
-              mutate(id);
+              deleteMenu(id);
             }}
             disabled={isLoading}
           >

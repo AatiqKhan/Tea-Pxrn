@@ -11,6 +11,8 @@ import AdminOrders from "./components/Admin-Orders/AdminOrders";
 import Admin from "./pages/admin";
 import Home from "./pages/home";
 import { Toaster } from "react-hot-toast";
+import Gallery from "./pages/gallery";
+import Menu from "./pages/menu";
 
 function App() {
   const queryClient = new QueryClient({
@@ -26,6 +28,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="gallery" element={<Gallery />} />
+          <Route path="menu" element={<Menu />} />
+
+          {/* admin route */}
           <Route path="admin" element={<Admin />}>
             <Route index element={<Navigate to="orders" replace />} />
             <Route path="orders" element={<AdminOrders />} />
