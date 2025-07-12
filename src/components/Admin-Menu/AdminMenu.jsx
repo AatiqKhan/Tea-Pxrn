@@ -22,10 +22,11 @@ export default function AdminMenu() {
     <div>
       <h1>Menu</h1>
       <div className="overflow-hidden rounded-md border border-solid border-e-gray-500">
-        <div className="grid grid-cols-1 items-center gap-x-2 border-b border-solid border-e-gray-600 px-5 py-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 items-center gap-x-2 border-b border-solid border-e-gray-600 px-5 py-3 md:grid-cols-3 lg:grid-cols-5">
           <div>ITEM</div>
           <div>PRICE</div>
           <div>DESCRIPTION</div>
+          <div>Category</div>
         </div>
 
         <div>
@@ -44,7 +45,7 @@ export default function AdminMenu() {
         >
           Add Menu Item
         </Button>
-        {showForm && <MenuForm />}
+        {showForm && <MenuForm setForm={setShowForm} />}
       </div>
     </div>
   );

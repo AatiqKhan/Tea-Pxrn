@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   {
@@ -25,21 +26,21 @@ export default function Header() {
         className={`fixed z-50 w-full transition-all duration-500 ${
           isScrolled
             ? "bg-coffee-dark/95 backdrop-blur-sm"
-            : "text-coffee-dark/95 bg-transparent"
+            : "bg-transparent text-coffee-dark/95"
         }`}
       >
         <div className="mx-auto max-w-5xl px-4">
           <div className="flex h-16 items-center justify-between">
             <a href="#home" className="flex items-center space-x-2">
-              <span className="text-cream text-xl">☕</span>
+              <span className="text-xl text-cream">☕</span>
               <span
                 className={
                   isScrolled
-                    ? "text-cream text-lg font-light tracking-wider"
-                    : "text-coffee-dark/95 text-lg font-light tracking-wider"
+                    ? "text-lg font-light tracking-wider text-cream"
+                    : "text-lg font-light tracking-wider text-coffee-dark/95"
                 }
               >
-                TEA-PxRN
+                Cafe Bliss
               </span>
             </a>
 
@@ -48,14 +49,13 @@ export default function Header() {
               {["home", "menu", "gallery"].map((item) => (
                 <a
                   key={item}
-                  href={`#${item}`}
                   className={
                     isScrolled
-                      ? "text-cream/80 hover:text-cream text-sm uppercase tracking-wider transition-colors duration-300"
-                      : "tet-coffee-dark/95 hover:text-cream text-sm uppercase tracking-wider transition-colors duration-300"
+                      ? "text-sm uppercase tracking-wider text-cream/80 transition-colors duration-300 hover:text-cream"
+                      : "tet-coffee-dark/95 text-sm uppercase tracking-wider transition-colors duration-300 hover:text-cream"
                   }
                 >
-                  {item}
+                  <NavLink to={`/${item}`}> {item}</NavLink>
                 </a>
               ))}
             </div>
@@ -63,7 +63,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-cream text-xl md:hidden"
+              className="text-xl text-cream md:hidden"
             >
               {isMenuOpen ? "✕" : "☰"}
             </button>
@@ -77,11 +77,10 @@ export default function Header() {
               {["home", "menu", "gallery"].map((item) => (
                 <a
                   key={item}
-                  href={`#${item}`}
-                  className="text-cream/80 hover:text-cream block py-2 text-sm uppercase tracking-wider"
+                  className="block py-2 text-sm uppercase tracking-wider text-cream/80 hover:text-cream"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item}
+                  <NavLink to={`/${item}`}> {item}</NavLink>
                 </a>
               ))}
             </div>

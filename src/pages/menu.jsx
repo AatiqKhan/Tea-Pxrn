@@ -2,77 +2,12 @@ import React, { useState } from "react";
 import MenuSection from "../components/Menu/menuSection";
 import Header from "../ui/Header";
 
-const menuCategories = {
-  coffee: [
-    {
-      name: "House Blend",
-      description:
-        "Our signature medium roast with notes of chocolate and hazelnut",
-      price: "4.50",
-    },
-    {
-      name: "Pour Over",
-      description: "Single-origin beans, meticulously hand-poured",
-      price: "5.00",
-    },
-    {
-      name: "Cold Brew",
-      description: "18-hour steeped, smooth and bold",
-      price: "4.75",
-    },
-    {
-      name: "Espresso",
-      description: "Rich, full-bodied double shot",
-      price: "3.50",
-    },
-    {
-      name: "Cappuccino",
-      description: "Equal parts espresso, steamed milk, and silky foam",
-      price: "4.75",
-    },
-  ],
-  pastries: [
-    {
-      name: "Croissant",
-      description: "Flaky, buttery, freshly baked daily",
-      price: "3.75",
-    },
-    {
-      name: "Cinnamon Roll",
-      description: "House-made with vanilla glaze",
-      price: "4.25",
-    },
-    {
-      name: "Chocolate Muffin",
-      description: "Double chocolate with dark chocolate chunks",
-      price: "3.50",
-    },
-  ],
-  specials: [
-    {
-      name: "Seasonal Latte",
-      description: "Ask about our current seasonal creation",
-      price: "5.50",
-    },
-    {
-      name: "Affogato",
-      description: "Vanilla bean gelato drowned in espresso",
-      price: "6.00",
-    },
-    {
-      name: "Tea Ceremony",
-      description: "Select loose leaf tea served in traditional style",
-      price: "5.75",
-    },
-  ],
-};
-
 export default function Menu() {
-  const [activeCategory, setActiveCategory] = useState("coffee");
-  const [hoveredItem, setHoveredItem] = useState(null);
+  //const [activeCategory, setActiveCategory] = useState("coffee");
+  //const [hoveredItem, setHoveredItem] = useState(null);
 
   return (
-    <div className="bg-white  min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Navigation (same as main page) */}
       {/* <nav className="bg-coffee-dark/95 backdrop-blur-sm">
         <div className="mx-auto max-w-5xl px-4">
@@ -89,7 +24,7 @@ export default function Menu() {
       <Header />
       {/* Menu Content */}
       <main className="mx-auto max-w-3xl px-4 py-20">
-        <h1 className="text-coffee-dark mb-16 text-center text-4xl font-light tracking-wider">
+        <h1 className="mb-16 text-center text-4xl font-light tracking-wider text-coffee-dark">
           MENU
         </h1>
 
@@ -150,12 +85,12 @@ export default function Menu() {
         {/* Daily Special Highlight */}
         <div className="mt-16 text-center">
           <div className="relative inline-block">
-            <div className="bg-coffee-dark/5 absolute inset-0 -rotate-1 transform"></div>
+            <div className="absolute inset-0 -rotate-1 transform bg-coffee-dark/5"></div>
             <div className="relative border-none bg-white p-6">
-              <p className="text-coffee-dark/60 mb-2 text-sm uppercase tracking-wider">
+              <p className="mb-2 text-sm uppercase tracking-wider text-coffee-dark/60">
                 Today's Special
               </p>
-              <h3 className="text-coffee-dark mb-1 text-xl font-medium">
+              <h3 className="mb-1 text-xl font-medium text-coffee-dark">
                 Barista's Choice
               </h3>
               <p className="text-coffee-dark/60">
@@ -167,9 +102,9 @@ export default function Menu() {
       </main>
 
       {/* Simple Footer */}
-      <footer className="bg-coffee-dark text-cream mt-20 py-8">
+      <footer className="mt-20 bg-coffee-dark py-8 text-cream">
         <div className="mx-auto max-w-5xl px-4 text-center">
-          <p className="text-cream/60 text-sm">
+          <p className="text-sm text-cream/60">
             Prices subject to change. Please inform us of any allergies.
           </p>
         </div>

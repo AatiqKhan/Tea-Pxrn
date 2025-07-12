@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { useForm } from "react-hook-form";
 import { useCreateMenu } from "./useCreateMenu";
 import { useEditMenu } from "./useEditMenu";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import { Controller } from "react-hook-form";
+import { Input } from "@mui/material";
 
-export default function MenuForm({ menuEdit = {} }) {
+export default function MenuForm({ menuEdit = {}, setForm }) {
   const { id: editId, ...editValues } = menuEdit;
   const isEdit = Boolean(editId);
-  const { register, handleSubmit, reset, formState } = useForm({
+  const { register, handleSubmit, reset, formState, control } = useForm({
     defaultValues: isEdit ? editValues : {},
   });
   const { errors } = formState;
@@ -17,6 +23,9 @@ export default function MenuForm({ menuEdit = {} }) {
   const { isEditing, editMenu } = useEditMenu();
 
   function onSubmit(data) {
+    console.log("xxx", data);
+    setForm((show) => !show);
+
     if (isEdit) {
       editMenu(
         { newMenuData: data, id: editId },
@@ -24,11 +33,12 @@ export default function MenuForm({ menuEdit = {} }) {
           onSuccess: () => reset(),
         },
       );
-      //console.log("xxx", data);
-    } else
+    } else {
+      //console.log(category);
       createMenu(data, {
         onSuccess: () => reset(),
       });
+    }
     //mutate(data);
   }
   function onError(errors) {
@@ -46,6 +56,13 @@ export default function MenuForm({ menuEdit = {} }) {
           label="Item"
           {...register("item", { required: "This Field is Required" })}
         />
+        {/*
+        -------------another input option from MUI----------
+        <Input
+          placeholder="ITEM Type in here…"
+          variant="outlined"
+          {...register("item", { required: "This Field is Required" })}
+        /> */}
         {errors?.item?.message && (
           <p className="text-red-700">{errors.item.message}</p>
         )}
@@ -92,6 +109,27 @@ export default function MenuForm({ menuEdit = {} }) {
         {errors?.price?.message && (
           <p className="text-red-700">{errors.price.message}</p>
         )}
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-simple-select-label">Category</InputLabel>
+
+          <Controller
+            name="category"
+            control={control}
+            defaultValue=""
+            rules={{ required: "This field is required" }}
+            render={({ field }) => (
+              <Select {...field} labelId="category-label" label="Category">
+                <MenuItem value="Coffee">Coffee</MenuItem>
+                <MenuItem value="Tea">Tea</MenuItem>
+                <MenuItem value="Tidbits">Tidbits</MenuItem>
+              </Select>
+            )}
+          />
+        </FormControl>
+        {errors?.category?.message && (
+          <p className="text-red-700">{errors.category.message}</p>
+        )}
+
         <button type="reset">cancel</button>
 
         <button disabled={isWorking}>

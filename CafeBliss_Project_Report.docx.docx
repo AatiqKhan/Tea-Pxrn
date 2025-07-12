@@ -1,0 +1,85 @@
+Cafe Bliss Web Application - Project Report
+
+1. Overview
+Cafe Bliss is a modern, responsive web application for a coffee shop, built using React and Vite. It provides a seamless user experience for browsing the menu, viewing a gallery, and managing a shopping cart. The app also includes an admin section for managing orders, menu items, and gallery images.
+
+2. Tools & Environment Used
+- Frontend Framework: React 18
+- Build Tool: Vite
+- Styling: Tailwind CSS, Material UI (MUI)
+- State Management: React Context, React Query
+- Routing: React Router DOM
+- Notifications: react-hot-toast
+- Backend/Database: Supabase (Backend-as-a-Service), Sanity (for images/content)
+- Testing: Jest, React Testing Library
+- Linting/Formatting: ESLint, Prettier
+- Development Environment: Visual Studio Code, Node.js, npm
+
+3. Analysis & Design
+Analysis:
+- Users: Customers (browse, order), Admins (manage content)
+- Core Features: Menu browsing, gallery viewing, cart management, admin dashboard, authentication.
+Design:
+- Component-Based Architecture: Each feature (menu, gallery, cart, admin) is modularized into React components.
+- Responsive UI: Uses Tailwind CSS for mobile-first, responsive design.
+- Navigation: Consistent header and footer, with clear navigation links.
+- Data Flow: React Query for server state, Context for cart state.
+
+4. Design Document
+- Main Pages: Home, Menu, Gallery, Cart, Admin (with subpages for orders, menu, gallery, users)
+- UI Components: Header, Footer, MenuSection, MasonaryLayout, Admin components
+- State Management: CartProvider (Context), QueryClientProvider (React Query)
+- Routing: Nested routes for admin, protected routes for admin access
+
+5. Program Code
+- Entry Point: src/main.jsx
+- App Structure: src/App.jsx sets up routing and providers
+- Pages: src/pages/
+- Components: src/components/
+- UI Elements: src/ui/
+- Services: src/services/ (API calls, Supabase integration)
+- Testing: Example test in src/pages/home.test.jsx
+
+6. Testing (I/O Screens)
+- Testing Framework: Jest, React Testing Library
+- Sample Test: Checks that the Home page renders the main heading.
+- Manual Testing: UI tested in browser for navigation, menu, gallery, and cart functionality.
+- Screenshots: Menu page, Gallery page, Cart, Admin (describe as needed)
+
+7. Implementation of Security Measures
+- Authentication: Login and signup forms for admin access (using Supabase).
+- Protected Routes: Admin pages are intended to be protected (with a ProtectedRoute component, can be enabled).
+- Input Validation: React Hook Form for form validation.
+- Best Practices: No sensitive data in frontend code, uses environment variables for API keys.
+
+8. Limitations of the Project
+- No Payment Integration: Cart does not process real payments.
+- Basic Admin Security: Admin protection is present but may need enhancement for production.
+- Limited Testing: Only basic frontend tests are implemented.
+- No Real-Time Updates: Orders and menu changes require manual refresh.
+- Backend/Database: Relies on Supabase; limited custom backend logic.
+
+9. Future Scope of the Project
+- Payment Gateway Integration: Add Stripe or Razorpay for real orders.
+- Enhanced Admin Security: Implement robust authentication and authorization.
+- Order Tracking: Real-time order status updates for users.
+- User Profiles: Allow users to register, login, and view order history.
+- Mobile App: Build a companion mobile app using React Native.
+- More Tests: Expand automated testing for all components and flows.
+
+10. Bibliography
+- React Documentation: https://react.dev/
+- Vite Documentation: https://vitejs.dev/
+- Tailwind CSS Docs: https://tailwindcss.com/docs
+- Material UI: https://mui.com/
+- Supabase Docs: https://supabase.com/docs
+- Sanity Docs: https://www.sanity.io/docs
+- React Query: https://tanstack.com/query/latest
+- Jest: https://jestjs.io/
+- React Testing Library: https://testing-library.com/docs/react-testing-library/intro/
+
+11. References
+- Cafe Bliss GitHub Repository (if applicable)
+- React Query Examples: https://tanstack.com/query/latest/docs/framework/react/examples
+- Supabase Example Projects: https://github.com/supabase/supabase/tree/master/examples
+- Sanity Image URL Builder: https://www.sanity.io/docs/image-url 

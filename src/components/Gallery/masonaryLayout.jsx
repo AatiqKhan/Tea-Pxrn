@@ -4,61 +4,28 @@ import Masonry from "@mui/lab/Masonry";
 
 //import { useState, useEffect } from "react";
 
-export default function MasonaryLayout() {
-  // const [images, setimages] = useState([]);
+export default function MasonaryLayout({ item }) {
+  //const { id, image, likes_count, alt_text } = item;
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const query = `*[_type == "gallery"]{ "image": image.asset->url }`;
-  //       try {
-  //         const result = await client.fetch(query);
-
-  //         setimages(result);
-  //       } catch (error) {
-  //         console.error("Error fetching data:", error);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   }, []);
-
-  const images = [
-    "slider/image1.jpg",
-    "slider/image2.jpg",
-    "slider/image3.jpg",
-    "slider/image4.jpg",
-    "slider/image5.jpg",
-    "slider/logo.png",
-    "slider/logo2.png",
-    "/menu/picsec1.jpeg",
-    "/menu/picsec2.jpeg",
-    "/menu/picsec3.jpeg",
-    "/menu/picsec4.jpeg",
-    "/menu/image1.jpeg",
-    "/menu/image2.jpeg",
-    "/menu/image3.jpeg",
-    "/menu/image4.jpeg",
-    "/menu/image5.jpeg",
-    "/menu/image6.jpeg",
-    "/menu/image7.jpeg",
-    "/menu/image8.jpeg",
-  ];
   return (
     <>
-      <div>
-        <div>
-          <Masonry columns={4} spacing={2}>
-            {images &&
-              images.map((image, index) => (
-                <div key={index}>
+      <div className="p-12">
+        <div className="h-auto w-full">
+          <Masonry columns={5} spacing={2}>
+            {item &&
+              item.map((src, i) => (
+                <div key={i} className="w-full">
                   <img
-                    src={image}
-                    // alt={images.alt}
+                    src={src}
+                    // alt={image.alt_text}
+                    alt={`Gallery image ${i + 1}`}
                     loading="lazy"
+                    className="block w-full rounded-2xl"
                   />
                 </div>
               ))}
           </Masonry>
+          {/* <p>LIKES<span>{image.likes_count}</span></p> */}
         </div>
       </div>
     </>

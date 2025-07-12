@@ -13,8 +13,17 @@ import Home from "./pages/home";
 import { Toaster } from "react-hot-toast";
 import Gallery from "./pages/gallery";
 import Menu from "./pages/menu";
+import LoginForm from "./features/authentication/loginForm";
+// import ProtectedRoute from "./ui/ProtectedRoute";
+import UserSignup from "./components/User-SignUp/userSignup";
+import Cart from "./pages/cart";
+import { CartProvider } from "./context/cart_context";
 
 function App() {
+  const arr = [1, 2, 3, 4];
+  const result = arr.map((i) => i < 2);
+  console.log(result);
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -26,18 +35,30 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
+        <CartProvider></CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="menu" element={<Menu />} />
+          <Route path="cart" element={<Cart />} />
 
           {/* admin route */}
-          <Route path="admin" element={<Admin />}>
+          <Route
+            path="admin"
+            element={
+              // <ProtectedRoute>
+              //   <Admin />
+              // </ProtectedRoute>
+              <Admin />
+            }
+          >
             <Route index element={<Navigate to="orders" replace />} />
             <Route path="orders" element={<AdminOrders />} />
             <Route path="menu" element={<AdminMenu />} />
             <Route path="gallery" element={<AdminGallery />} />
+            <Route path="users" element={<UserSignup />} />
           </Route>
+          <Route path="login" element={<LoginForm />} />
         </Routes>
 
         {/* <Route element={<AdminLayout />}>
